@@ -176,7 +176,7 @@ fun SignUpComposable(
                 Box(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Vehicle Type", style = MaterialTheme.typography.bodySmall)
+                    Text("Vehicle Type", style = MaterialTheme.typography.bodyMedium)
                     TextButton(
                         onClick = { expanded = !expanded },
                         modifier = Modifier.fillMaxWidth()

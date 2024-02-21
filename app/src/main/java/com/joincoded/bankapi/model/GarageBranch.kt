@@ -6,5 +6,6 @@ data class GarageBranch(
     var address: String, var phone: String,
     var workingHours: String, var location: String,
     var imageURI: Int,
-    var favorite: Boolean = false
+    var favorite: Boolean = false,
+    var reviews: String
 )
