@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
@@ -27,6 +29,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.joincoded.bankapi.R
+import com.joincoded.bankapi.VehicleTypeDropdown
+import com.joincoded.bankapi.data.VehicleType
 import com.joincoded.bankapi.ui.theme.DarkGreen
 import com.joincoded.bankapi.viewmodel.GarageViewModel
 
@@ -39,6 +43,15 @@ fun SignUpComposable(
 ) {
     var user by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var type by remember { mutableStateOf("") }
+    var year by remember { mutableStateOf("") }
+    var model by remember { mutableStateOf("") }
+
+
+    var selectedVehicleType by remember { mutableStateOf(VehicleType.CAR) }
+
+    val vehicleTypes = VehicleType.values()
+
 
     var confirmPassword by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
@@ -121,6 +134,38 @@ fun SignUpComposable(
                     }
                 }
             )
+
+
+            OutlinedTextField(
+                value = year,
+                onValueChange = { newYear -> user = newYear },
+                label = { Text("Year") },
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                ),
+
+                leadingIcon = { Icon(Icons.Default.DateRange, contentDescription = null) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
+
+            OutlinedTextField(
+                value = model,
+                onValueChange = { newModel -> user = newModel },
+                label = { Text("Model") },
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                leadingIcon = { Icon(Icons.Default.Add, contentDescription = null) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
+
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
