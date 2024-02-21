@@ -1,6 +1,7 @@
 package com.joincoded.bankapi.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -46,7 +47,7 @@ fun SignUpComposable(
     var type by remember { mutableStateOf("") }
     var year by remember { mutableStateOf("") }
     var model by remember { mutableStateOf("") }
-
+    var expanded by remember { mutableStateOf(false) }
 
     var selectedVehicleType by remember { mutableStateOf(VehicleType.CAR) }
 
@@ -135,7 +136,6 @@ fun SignUpComposable(
                 }
             )
 
-
             OutlinedTextField(
                 value = year,
                 onValueChange = { newYear -> user = newYear },
@@ -164,6 +164,49 @@ fun SignUpComposable(
                     .fillMaxWidth()
                     .padding(8.dp)
             )
+
+
+            // Vehicle Type Dropdown
+            Column(
+                modifier = Modifier.padding(8.dp)
+            ) {
+
+
+                Spacer(modifier = Modifier.height(4.dp))
+                Box(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Vehicle Type", style = MaterialTheme.typography.bodyMedium)
+                    TextButton(
+                        onClick = { expanded = !expanded },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(selectedVehicleType.name)
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        VehicleType.values().forEach { vehicleType ->
+                            DropdownMenuItem(onClick = {
+                                selectedVehicleType = vehicleType
+                                expanded = false
+                            }, text = {
+                                Text(text = vehicleType.name)
+
+
+                            })
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
 
 
 

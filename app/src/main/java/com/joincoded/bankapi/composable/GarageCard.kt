@@ -14,8 +14,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.joincoded.bankapi.model.GarageBranch
 import com.joincoded.bankapi.R
+import com.joincoded.bankapi.model.GarageBranch
 
 @Composable
 fun BranchCard(
@@ -24,13 +24,12 @@ fun BranchCard(
     onDetailsClick: () -> Unit
 ) {
     var favorite by remember { mutableStateOf(garageBranch.favorite) }
-    val elevation by animateFloatAsState(if (favorite) 8f else 4f)
-
     Card(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onDetailsClick() },
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
+
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -41,11 +40,12 @@ fun BranchCard(
                     .size(100.dp)
                     .clip(RoundedCornerShape(20.dp)),
                 painter = painterResource(id = garageBranch.imageURI),
-                contentDescription = "Branch",
+                contentDescription = "Branch"
             )
 
             Spacer(modifier = Modifier.width(16.dp))
 
+            // Branch details
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = garageBranch.name,
@@ -59,45 +59,37 @@ fun BranchCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-
                 Text(
-                    text = "${garageBranch.type}",
+                    text = garageBranch.type.toString(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Spacer(modifier = Modifier.height(4.dp))
-
             }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // Location button
             IconButton(
                 onClick = { /* Handle location button click */ },
-                modifier = Modifier
-                    .size(50.dp)
-                    .padding(4.dp)
+                modifier = Modifier.size(40.dp)
             ) {
                 Icon(
                     Icons.Filled.LocationOn,
                     contentDescription = "Location",
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = Color.Red
                 )
             }
 
-
-
+            // Favorite button
             IconButton(
                 onClick = { favorite = !favorite },
-                modifier = Modifier.size(30.dp)
-                    .background(
-                        color = if (favorite) MaterialTheme.colorScheme.primary else Color.Transparent,
-                        shape = RoundedCornerShape(4.dp)
-                    )
+                modifier = Modifier.size(40.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.star),
                     contentDescription = "Favorite",
-                    tint = if (favorite) Color.White else MaterialTheme.colorScheme.onSurface
+                    tint = if (favorite) Color.Yellow else Color.Black
                 )
-
-
             }
         }
     }
