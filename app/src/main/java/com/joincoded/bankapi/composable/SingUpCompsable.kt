@@ -138,7 +138,7 @@ fun SignUpComposable(
 
             OutlinedTextField(
                 value = year,
-                onValueChange = { newYear -> user = newYear },
+                onValueChange = { newYear -> year = newYear },
                 label = { Text("Year") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
@@ -153,7 +153,7 @@ fun SignUpComposable(
 
             OutlinedTextField(
                 value = model,
-                onValueChange = { newModel -> user = newModel },
+                onValueChange = { newModel -> model = newModel },
                 label = { Text("Model") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Email,
