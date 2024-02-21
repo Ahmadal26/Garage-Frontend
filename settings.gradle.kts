@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GarageApp"
+rootProject.name = "BankAPI"
 include(":app")
- 

@@ -1,4 +1,4 @@
-package com.example.garageapp.ui.theme
+package com.joincoded.bankapi.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

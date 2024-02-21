@@ -1,4 +1,4 @@
-package com.example.garageapp
+package com.joincoded.bankapi
 
 import org.junit.Test
 
