@@ -24,7 +24,7 @@ fun MyNavHost(
 
 
     if (viewModel.token?.token != null) {
-        navController.navigate(Routes.transactionRoute)
+        navController.navigate(Routes.homeRoute)
 
     }
 
@@ -48,16 +48,13 @@ fun MyNavHost(
             )
         }
 
-        composable(Routes.singInRoute) {
-            ProfilePage(viewModel, onDetailsClick = { navController.navigate(Routes.profileRoute) })
-        }
 
         composable(Routes.singInRoute) {
-            SignInScreen(viewModel)
+            SignInScreen(viewModel,  onClick = {navController.navigate(Routes.garageListRoute)})
         }
         composable(Routes.signupRoute) {
             SignUpComposable(viewModel,
-                onSignInClicked = { navController.navigate(Routes.homeRoute) }
+                onSignInClicked = { navController.navigate(Routes.signupRoute) }
             )
         }
 

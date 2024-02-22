@@ -43,7 +43,7 @@ fun SignUpComposable(
 
     var selectedVehicleType by remember { mutableStateOf(VehicleType.car) }
 
-    val vehicleTypes = VehicleType.entries.toTypedArray()
+//    val vehicleTypes = VehicleType.entries.toTypedArray()
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     if (viewModel.token?.token != null) {
@@ -208,7 +208,7 @@ fun SignUpComposable(
                     viewModel.signup(
                         username = user,
                         password = password,
-                        vehicleType = vehicleTypes,
+                        vehicleType = VehicleType.car,
                         vehicleYear = vehicleYear,
                         vehicleModel = vehicleModel
                     )

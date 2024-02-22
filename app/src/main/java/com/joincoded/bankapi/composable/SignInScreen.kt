@@ -22,9 +22,13 @@ import com.joincoded.bankapi.ui.theme.DarkGreen
 import com.joincoded.bankapi.viewmodel.GarageViewModel
 
 @Composable
-fun SignInScreen(viewModel: GarageViewModel) {
+fun SignInScreen(viewModel: GarageViewModel, onClick:()->Unit) {
     var user by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    if (viewModel.token?.token != null) {
+        onClick()
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxWidth(),

@@ -29,7 +29,7 @@ class GarageViewModel : ViewModel() {
         username: String,
         password: String,
         email: String = "",
-        vehicleType: Array<VehicleType>,
+        vehicleType: VehicleType,
         vehicleYear: String,
         vehicleModel: String
     ) {
@@ -72,15 +72,3 @@ class GarageViewModel : ViewModel() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
