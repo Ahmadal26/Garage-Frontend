@@ -43,13 +43,10 @@ fun SignUpComposable(
 
     var selectedVehicleType by remember { mutableStateOf(VehicleType.car) }
 
-    val vehicleTypes = VehicleType.values()
-
-
-    var confirmPassword by remember { mutableStateOf("") }
+    val vehicleTypes = VehicleType.entries.toTypedArray()
     var isPasswordVisible by remember { mutableStateOf(false) }
 
-    if (viewModel.token?.token != null){
+    if (viewModel.token?.token != null) {
         onSignInClicked()
     }
 
@@ -218,7 +215,8 @@ fun SignUpComposable(
 
                 },
                 modifier = Modifier
-                    .fillMaxWidth().padding(20.dp),
+                    .fillMaxWidth()
+                    .padding(20.dp),
 
                 colors = ButtonDefaults.buttonColors()
 

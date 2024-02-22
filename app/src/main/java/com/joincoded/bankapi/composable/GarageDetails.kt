@@ -79,7 +79,8 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
 
             IconButton(
                 onClick = { favorite.value = !favorite.value },
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier
+                    .size(30.dp)
                     .background(
                         color = if (favorite.value) Color.Transparent else Color.Transparent,
                         shape = MaterialTheme.shapes.medium

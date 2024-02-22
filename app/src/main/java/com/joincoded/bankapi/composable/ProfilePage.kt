@@ -16,7 +16,7 @@ fun ProfilePage(
     val requests = viewModel.requests
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .fillMaxSize()
     ) {
