@@ -71,4 +71,8 @@ class GarageViewModel : ViewModel() {
         return GarageRepo.garageList
     }
 
+   fun profilePage(){
+       return
+   }
+
 }

@@ -50,7 +50,11 @@ fun MyNavHost(
 
 
         composable(Routes.singInRoute) {
-            SignInScreen(viewModel,  onClick = {navController.navigate(Routes.garageListRoute)})
+            SignInScreen(viewModel,  onClick = {navController.navigate(Routes.profileRoute)})
+        }
+
+        composable(Routes.profileRoute) {
+            ProfilePage(viewModel)
         }
         composable(Routes.signupRoute) {
             SignUpComposable(viewModel,
