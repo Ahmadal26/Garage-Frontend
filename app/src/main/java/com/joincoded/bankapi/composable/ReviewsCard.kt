@@ -2,16 +2,19 @@ package com.joincoded.bankapi.composable
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.joincoded.bankapi.data.Review
 
-data class Review(val userName: String, val comment: String, val rating: Int)
 
 @Composable
 fun ReviewsCard(review: Review) {
@@ -19,7 +22,11 @@ fun ReviewsCard(review: Review) {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
-        shape = CircleShape
+        shape = RoundedCornerShape(16.dp),
+
+
+
+
     ) {
         Column(
             modifier = Modifier

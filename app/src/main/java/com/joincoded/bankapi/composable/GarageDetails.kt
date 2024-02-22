@@ -27,13 +27,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.joincoded.bankapi.R
 import com.joincoded.bankapi.composable.ReviewsCard
+import com.joincoded.bankapi.data.Review
 import com.joincoded.bankapi.model.GarageBranch
 import com.joincoded.bankapi.ui.theme.Disabled
 import com.joincoded.bankapi.ui.theme.Gold
 import com.joincoded.bankapi.viewmodel.GarageViewModel
-
-
-data class Review(val userName: String, val comment: String, val rating: Int)
 @Composable
 fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
     val localUriHandler = LocalUriHandler.current
@@ -44,7 +42,6 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
         Review("Mubarak", "Excellent experience", 4),
         Review("Aseel", "Could be better", 3)
     )
-
 
     Column(
         modifier = Modifier
@@ -72,10 +69,9 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
         ) {
             Text(
                 text = branch.name,
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.weight(1f)
             )
-
 
             IconButton(
                 onClick = { favorite.value = !favorite.value },
@@ -92,11 +88,6 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
                     tint = if (favorite.value) Color.Yellow else Color.Gray
                 )
             }
-
-
-
-
-
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -127,20 +118,6 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-
-//        LazyColumn {
-//            item {
-//
-//                Text(text = "Reviews", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-//            }
-//            items(reviews) { review ->
-//                ReviewsCard(review = Review() )
-//            }
-//        }
-
-
         IconButton(
             onClick = {
                 localUriHandler.openUri(branch.location)
@@ -154,12 +131,33 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
             )
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Displaying Reviews inside a scrollable LazyColumn
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            item {
+                Text(
+                    text = "Reviews",
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+
+            items(reviews) { review ->
+                ReviewsCard(review = review)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
+
         // Floating "Request" button
         FloatingActionButton(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             onClick = { isRequested.value = !isRequested.value },
             containerColor = if (isRequested.value) Color.Gray else MaterialTheme.colorScheme.primary
         ) {
