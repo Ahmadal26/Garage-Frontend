@@ -1,8 +1,8 @@
 package com.joincoded.bankapi.data
 
 enum class VehicleType (val displayName: String) {
-        CAR("Car"),
-        MOTORCYCLE("Motorcycle"),
-        BOAT("Boat")
+        car("Car"),
+        motorcycle("Motorcycle"),
+        boat("Boat")
     }
 

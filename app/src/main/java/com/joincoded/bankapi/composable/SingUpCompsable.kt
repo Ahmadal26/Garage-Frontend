@@ -1,7 +1,5 @@
 package com.joincoded.bankapi.composable
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,18 +19,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.joincoded.bankapi.R
-import com.joincoded.bankapi.VehicleTypeDropdown
 import com.joincoded.bankapi.data.VehicleType
-import com.joincoded.bankapi.ui.theme.DarkGreen
 import com.joincoded.bankapi.viewmodel.GarageViewModel
 
 
@@ -40,22 +32,27 @@ import com.joincoded.bankapi.viewmodel.GarageViewModel
 @Composable
 fun SignUpComposable(
     viewModel: GarageViewModel, onSignInClicked: () -> Unit,
-    onSignUpClicked: () -> Unit,
 ) {
     var user by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var type by remember { mutableStateOf("") }
-    var year by remember { mutableStateOf("") }
-    var model by remember { mutableStateOf("") }
+    var vehicleType by remember { mutableStateOf("") }
+    var vehicleYear by remember { mutableStateOf("") }
+    var vehicleModel by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
 
-    var selectedVehicleType by remember { mutableStateOf(VehicleType.CAR) }
+    var selectedVehicleType by remember { mutableStateOf(VehicleType.car) }
 
     val vehicleTypes = VehicleType.values()
 
 
     var confirmPassword by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
+
+    if (viewModel.token?.token != null){
+        onSignInClicked()
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -86,7 +83,7 @@ fun SignUpComposable(
 
             OutlinedTextField(
                 value = user,
-                onValueChange = { newEmail -> user = newEmail },
+                onValueChange = { newUser -> user = newUser },
                 label = { Text("Username") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Email,
@@ -98,6 +95,19 @@ fun SignUpComposable(
                     .padding(8.dp)
             )
 
+            OutlinedTextField(
+                value = email,
+                onValueChange = { newEmail -> email = newEmail },
+                label = { Text("Email") },
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -119,26 +129,8 @@ fun SignUpComposable(
 
 
             OutlinedTextField(
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it },
-                label = { Text("Confirm Password") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
-                        Icon(
-                            if (isPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                            contentDescription = null
-                        )
-                    }
-                }
-            )
-
-            OutlinedTextField(
-                value = year,
-                onValueChange = { newYear -> year = newYear },
+                value = vehicleYear,
+                onValueChange = { newYear -> vehicleYear = newYear },
                 label = { Text("Year") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
@@ -152,8 +144,8 @@ fun SignUpComposable(
             )
 
             OutlinedTextField(
-                value = model,
-                onValueChange = { newModel -> model = newModel },
+                value = vehicleModel,
+                onValueChange = { newModel -> vehicleModel = newModel },
                 label = { Text("Model") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Email,
@@ -216,11 +208,17 @@ fun SignUpComposable(
             Button(
                 onClick = {
 
-                    onSignUpClicked()
+                    viewModel.signup(
+                        username = user,
+                        password = password,
+                        vehicleType = vehicleTypes,
+                        vehicleYear = vehicleYear,
+                        vehicleModel = vehicleModel
+                    )
 
                 },
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth().padding(20.dp),
 
                 colors = ButtonDefaults.buttonColors()
 
