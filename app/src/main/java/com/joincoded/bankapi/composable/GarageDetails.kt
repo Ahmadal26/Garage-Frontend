@@ -1,6 +1,7 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.joincoded.bankapi.R
+import com.joincoded.bankapi.composable.ReviewsCard
 import com.joincoded.bankapi.model.GarageBranch
 import com.joincoded.bankapi.ui.theme.Disabled
 import com.joincoded.bankapi.ui.theme.Gold
@@ -77,7 +79,8 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
 
             IconButton(
                 onClick = { favorite.value = !favorite.value },
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier
+                    .size(30.dp)
                     .background(
                         color = if (favorite.value) Color.Transparent else Color.Transparent,
                         shape = MaterialTheme.shapes.medium
@@ -127,14 +130,15 @@ fun GarageDetails(branch: GarageBranch?, viewModel: GarageViewModel) {
         Spacer(modifier = Modifier.height(16.dp))
 
 
-        LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-
-
-
-        }
+//        LazyColumn {
+//            item {
+//
+//                Text(text = "Reviews", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+//            }
+//            items(reviews) { review ->
+//                ReviewsCard(review = Review() )
+//            }
+//        }
 
 
         IconButton(

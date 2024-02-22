@@ -3,12 +3,11 @@ package com.joincoded.bankapi.data
 data class User(
     var username: String,
     var password: String,
-    var image: String?,
-    var token: String?
+    var email: String,
+    var vehicleType: Array<VehicleType>,
+    var vehicleYear: String,
+    var vehicleModel: String,
+    val token: String?
 
-) {
-    constructor (username: String, password: String) : this(username, password, null, null) {
-
-    }
-}
+)
 

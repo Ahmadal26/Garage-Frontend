@@ -30,7 +30,7 @@ fun BranchCard(
             .clickable { onDetailsClick() },
         shape = RoundedCornerShape(16.dp),
 
-    ) {
+        ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)

@@ -57,8 +57,7 @@ fun MyNavHost(
         }
         composable(Routes.signupRoute) {
             SignUpComposable(viewModel,
-                onSignInClicked = { navController.navigate(Routes.singInRoute) },
-                onSignUpClicked = { navController.navigate(Routes.signupRoute) }
+                onSignInClicked = { navController.navigate(Routes.homeRoute) }
             )
         }
 
